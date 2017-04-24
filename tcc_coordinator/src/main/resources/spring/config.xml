@@ -1,0 +1,76 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo = "http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<bean id  =  "config" class  =  "com.netease.backend.coordinator.config.CoordinatorConfig">
+		<property name = "appName" value = "Coordinator" />
+		<!--coordinator config-->	
+		<property name = "bgThreadNum" value = "20" />
+		<property name = "retryParallelism" value = "20" />
+		<property name = "expireTime" value = "10000" />
+		<property name = "ckptInterval" value = "5000" />
+		<property name = "monitorInterval" value = "300000" />
+		<property name = "rdsIp" value="10.120.146.129:3306"/>
+		<!--alarm and boundary config-->	
+		<property name = "alarmRunningTx" value = "5" />
+		<property name = "alarmTxCount" value = "5" />
+		<property name = "maxRunningTx" value = "1000" />
+		<property name = "maxTxCount" value = "100000" />
+		<!--interface config-->		
+		<property name = "zkAddress" value = "zookeeper://127.0.0.1:2181" />
+		<property name = "version" value = "1.0.0" />
+		<property name = "group" value = "vstore" />
+
+		<!-- 	<property name = "appGroup" value = "vstore" />  -->
+	</bean>
+
+	<bean id = "localDataSource" class = "org.apache.commons.dbcp.BasicDataSource"
+		destroy-method = "close">
+		<!--
+		 defaultAutoCommit：设置数据源中返回的连接是否采用自动机制，默认值为true；
+		 defaultReadOnly：设置数据源是否仅能执行只读操作，默认值为：false；
+		 maxActive：最大连接数据库连接数，设置为0时，表示没有限制； &#8226;maxIdle：最大等待连接中的数量，设置为0时，表示没有限制；
+		 maxWait：最大等待秒数，单位毫秒，超时会报错误信息；
+		-->
+		<property name = "driverClassName" value = "com.mysql.jdbc.Driver" />
+		<property name = "url" value = "jdbc:mysql://10.13.4.23:3306/tcc" />
+		<property name = "username" value = "test" />
+		<property name = "password" value = "test123" />
+		<property name = "initialSize" value = "10"/>
+		<property name = "maxActive" value = "100" />
+		<property name = "maxIdle" value = "20" />
+		<property name = "minIdle" value = "20" />
+		<property name = "maxWait" value = "2000" />
+		<property name = "testWhileIdle" value="true" />
+		<property name = "testOnBorrow" value="false" />
+		<property name = "testOnReturn" value="false" />
+		<property name = "validationQuery" value="select 1" />
+		<property name = "timeBetweenEvictionRunsMillis" value="60000" />
+		<property name = "numTestsPerEvictionRun" value="10" />
+		<property name = "minEvictableIdleTimeMillis" value="1800000" />
+	</bean>
+	
+	<bean id = "systemDataSource" class = "org.apache.commons.dbcp.BasicDataSource"
+		destroy-method = "close">
+		<property name = "driverClassName" value = "com.mysql.jdbc.Driver" />
+		<property name = "url" value = "jdbc:mysql://10.13.4.23:3306/tcc_global" />
+		<property name = "username" value = "test" />
+		<property name = "password" value = "test123" />
+		<property name = "initialSize" value = "5"/>
+		<property name = "maxActive" value = "10" />
+		<property name = "maxIdle" value = "10" />
+		<property name = "minIdle" value = "10" />
+		<property name = "maxWait" value = "2000" />
+		<property name = "testWhileIdle" value="true" />
+		<property name = "testOnBorrow" value="false" />
+		<property name = "testOnReturn" value="false" />
+		<property name = "validationQuery" value="select 1" />
+		<property name = "timeBetweenEvictionRunsMillis" value="60000" />
+		<property name = "numTestsPerEvictionRun" value="5" />
+		<property name = "minEvictableIdleTimeMillis" value="600000" />
+	</bean>
+</beans>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 1999-2011 Alibaba Group.
+ -  
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -  
+ -      http://www.apache.org/licenses/LICENSE-2.0
+ -  
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+-->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{hh:mm:ss:sss}][%p] %c{1}: %m%n"/>
+		</layout>
+	</appender>
+	
+	<appender name="tracer" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="logs/trace.log"/>  <!--日志路径-->
+        <param name="Append" value="true"/> <!--是否追加-->
+        <param name="MaxBackupIndex" value="3"/>        <!--最大roll的文件数-->
+        <param name="MaxFileSize" value="524288000"/> <!--文件size上限-->
+        <layout class="org.apache.log4j.PatternLayout">          <!--日志输出格式-->
+            <param name="ConversionPattern" value="%m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="dailyFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="logs/coordinator/coordinator.log"/>  <!--日志路径-->
+        <param name="Append" value="true"/> <!--是否追加-->
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/> 
+        <layout class="org.apache.log4j.PatternLayout">          <!--日志输出格式-->
+            <param name="ConversionPattern" value="[%d{hh:mm:ss:sss}][%p] %c{1}: %m%n"/>
+        </layout>
+    </appender>
+ 
+   <!--自定义logger，additivity: 是否遵循缺省的继承机制-->
+    <logger name="traceLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="tracer"/>
+    </logger>
+    
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="dailyFile" />
+	</root>
+</log4j:configuration>
