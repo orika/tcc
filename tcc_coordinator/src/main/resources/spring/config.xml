@@ -5,7 +5,7 @@
 	xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<bean id  =  "config" class  =  "com.netease.backend.coordinator.config.CoordinatorConfig">
+	<bean id  =  "config" class  =  "com.mogujie.tcc.coordinator.config.CoordinatorConfig">
 		<property name = "appName" value = "Coordinator" />
 		<!--coordinator config-->	
 		<property name = "bgThreadNum" value = "20" />

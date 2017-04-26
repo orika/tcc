@@ -5,23 +5,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<bean id="coord" class="com.netease.backend.coordinator.DefaultCoordinator" >
+	<bean id="coord" class="com.mogujie.tcc.coordinator.DefaultCoordinator" >
 		<constructor-arg ref= "tccContainer"/>
 	</bean>
-	<dubbo:service interface="com.netease.backend.tcc.Coordinator" ref="coord"/>
+	<dubbo:service interface="com.mogujie.tcc.Coordinator" ref="coord"/>
 	
-	<bean id = "tccContainer" class = "com.netease.backend.coordinator.TccContainer" init-method="start">
+	<bean id = "tccContainer" class = "com.mogujie.tcc.coordinator.TccContainer" init-method="start">
 		<constructor-arg index = "0" ref= "tccMonitor"/>
 		<constructor-arg index = "1" ref= "recoverManager"/>
 		<constructor-arg index = "2" ref= "txManager"/>
 		<constructor-arg index = "3" ref= "uuidGenerator"/>
 	</bean>
 	
-	<bean id="serviceContext" class="com.netease.backend.coordinator.ServiceContext">
+	<bean id="serviceContext" class="com.mogujie.tcc.coordinator.ServiceContext">
 		<constructor-arg ref= "config"/>
 	</bean>
 	
-	<bean id = "tccMonitor" class = "com.netease.backend.coordinator.monitor.DBTccMonitor">
+	<bean id = "tccMonitor" class = "com.mogujie.tcc.coordinator.monitor.DBTccMonitor">
 		<constructor-arg index = "0" ref= "config"/>
 		<constructor-arg index = "1" ref= "txManager"/>
 		<constructor-arg index = "2" ref= "idForCoordinator"/>
@@ -29,13 +29,13 @@
 		<property name="monitorUtil" ref="monitorUtil"/>
 	</bean>
 	
-	<bean id = "recoverManager" class = "com.netease.backend.coordinator.recover.DBRecoverManager">
+	<bean id = "recoverManager" class = "com.mogujie.tcc.coordinator.recover.DBRecoverManager">
 		<property name="txManager" ref="txManager" />
 		<property name="logMgr" ref="logManager" />
 		<property name="idForCoordinator" ref="idForCoordinator" />
 	</bean>
 	
-	<bean id = "txManager" class = "com.netease.backend.coordinator.transaction.TxManager">
+	<bean id = "txManager" class = "com.mogujie.tcc.coordinator.transaction.TxManager">
 		<constructor-arg index = "0" ref="config"/>
 		<constructor-arg index = "1" ref= "logManager"/>
 		<constructor-arg index = "2" ref= "idGenerator"/>
@@ -43,27 +43,27 @@
 		<constructor-arg index = "4" ref= "serviceContext"/>
 	</bean>
 	
-	<bean id = "idGenerator" class = "com.netease.backend.coordinator.id.IdGenerator">
+	<bean id = "idGenerator" class = "com.mogujie.tcc.coordinator.id.IdGenerator">
 		<property name="idForCoordinator" ref="idForCoordinator" />
 		<property name="uuidGenerator" ref="uuidGenerator" />
 	</bean>
-	<bean id = "idForCoordinator" class = "com.netease.backend.coordinator.id.db.ServerIdDistributor">
+	<bean id = "idForCoordinator" class = "com.mogujie.tcc.coordinator.id.db.ServerIdDistributor">
 		<constructor-arg ref="dbUtil"/>
 	</bean>
-	<bean id = "uuidGenerator" class = "com.netease.backend.coordinator.id.db.UuidGeneratorImp">
+	<bean id = "uuidGenerator" class = "com.mogujie.tcc.coordinator.id.db.UuidGeneratorImp">
 		<constructor-arg index = "0" ref= "idForCoordinator"/>
 	</bean>
 	
-	<bean id = "logManager" class = "com.netease.backend.coordinator.log.db.LogManagerImp">
+	<bean id = "logManager" class = "com.mogujie.tcc.coordinator.log.db.LogManagerImp">
 		<property name="dbUtil" ref="dbUtil" />
 	</bean>
 	
-	<bean id = "dbUtil" class = "com.netease.backend.coordinator.util.DbUtil">
+	<bean id = "dbUtil" class = "com.mogujie.tcc.coordinator.util.DbUtil">
 		<constructor-arg index = "0" ref= "config"/>
 		<constructor-arg index = "1" ref= "localDataSource"/>
 		<constructor-arg index = "2" ref= "systemDataSource"/>
 	</bean>
-	<bean id = "monitorUtil" class = "com.netease.backend.coordinator.util.MonitorUtil">
+	<bean id = "monitorUtil" class = "com.mogujie.tcc.coordinator.util.MonitorUtil">
 		<constructor-arg index = "0" ref= "config"/>
 	</bean>
 </beans>

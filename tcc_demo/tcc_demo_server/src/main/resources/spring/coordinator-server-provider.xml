@@ -20,15 +20,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<bean id="payment" class="com.netease.backend.tcc.demo.impl.Payment" />
-	<dubbo:service interface="com.netease.backend.tcc.demo.IPayment" ref="payment" />
+	<bean id="payment" class="com.mogujie.tcc.demo.impl.Payment" />
+	<dubbo:service interface="com.mogujie.tcc.demo.IPayment" ref="payment" />
 	
-	<bean id="sale" class="com.netease.backend.tcc.demo.impl.Sale" />
-	<dubbo:service interface="com.netease.backend.tcc.demo.ISale" ref="sale" />
+	<bean id="sale" class="com.mogujie.tcc.demo.impl.Sale" />
+	<dubbo:service interface="com.mogujie.tcc.demo.ISale" ref="sale" />
 	
-	<bean id="order" class="com.netease.backend.tcc.demo.impl.Order">
+	<bean id="order" class="com.mogujie.tcc.demo.impl.Order">
 		<property name="payment" ref="payment" />
 		<property name="sale" ref="sale" />
 	</bean>
-	<dubbo:service interface="com.netease.backend.tcc.demo.IOrder" ref="order" />
+	<dubbo:service interface="com.mogujie.tcc.demo.IOrder" ref="order" />
 </beans>

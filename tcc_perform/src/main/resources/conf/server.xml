@@ -20,12 +20,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<bean id="payment" class="com.netease.backend.tcc.perftest.server.Payment" />
-	<dubbo:service interface="com.netease.backend.tcc.perftest.face.IPayment" ref="payment" loadbalance="roundrobin"/>
+	<bean id="payment" class="com.mogujie.tcc.perftest.server.Payment" />
+	<dubbo:service interface="com.mogujie.tcc.perftest.face.IPayment" ref="payment" loadbalance="roundrobin"/>
 	
-	<bean id="sale" class="com.netease.backend.tcc.perftest.server.Sale" />
-	<dubbo:service interface="com.netease.backend.tcc.perftest.face.ISale" ref="sale" loadbalance="roundrobin"/>
+	<bean id="sale" class="com.mogujie.tcc.perftest.server.Sale" />
+	<dubbo:service interface="com.mogujie.tcc.perftest.face.ISale" ref="sale" loadbalance="roundrobin"/>
 	
-	<bean id="order" class="com.netease.backend.tcc.perftest.server.Order"/>
-	<dubbo:service interface="com.netease.backend.tcc.perftest.face.IOrder" ref="order" loadbalance="roundrobin"/>
+	<bean id="order" class="com.mogujie.tcc.perftest.server.Order"/>
+	<dubbo:service interface="com.mogujie.tcc.perftest.face.IOrder" ref="order" loadbalance="roundrobin"/>
 </beans>

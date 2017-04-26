@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<bean id="SimpleTest" class="com.netease.backend.tcc.TccActivity">
+	<bean id="SimpleTest" class="com.mogujie.tcc.TccActivity">
        	<constructor-arg index="0" ref="tccManager"></constructor-arg>  
         <constructor-arg index="1">
         	<list>

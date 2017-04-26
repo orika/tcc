@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.netease</groupId>
+		<groupId>com.mogujie</groupId>
 		<artifactId>tcc</artifactId>
 		<version>1</version>
 	</parent>
@@ -17,14 +17,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.netease</groupId>
+			<groupId>com.mogujie</groupId>
 			<artifactId>tcc_api</artifactId>
 			<version>${applicationVersion}</version>
 		</dependency>
-		<!--<dependency>-->
-       	 	<!--<groupId>com.netease.backend.trace</groupId>-->
-       		<!--<artifactId>trace-client</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
@@ -53,10 +49,6 @@
 		    <groupId>commons-dbcp</groupId>
     		<artifactId>commons-dbcp</artifactId>
 		</dependency>
-		<!--<dependency>-->
-    		<!--<groupId>com.netease</groupId>-->
-   			<!--<artifactId>monitor-jar</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>  
         	<artifactId>junit</artifactId>  
