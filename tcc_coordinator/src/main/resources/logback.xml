@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <!--<conversionRule conversionWord="ip" converterClass="com.mogujie.service.xiaodian.trade.base.utils.IpConvert" />-->
+    <!--<property name="FILE_PATTERN" value="%d %ip [%t] %5p %c{1}:%L - %m%n" />-->
+    <property name="FILE_PATTERN" value="%d [%t] %5p %c{1}:%L - %m%n" />
+    <property name="LOG_FILE_NAME" value="tccCoordinator" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${FILE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${CATALINA_APPLOG}/${LOG_FILE_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${CATALINA_APPLOG}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}_%i.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>500MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name ="ASYNC_STDOUT" class= "ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold >80</discardingThreshold>
+        <queueSize>8192</queueSize>
+        <appender-ref ref ="STDOUT"/>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_STDOUT" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

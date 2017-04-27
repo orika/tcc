@@ -2,7 +2,6 @@ package com.mogujie.tcc.coordinator.task;
 
 import java.util.List;
 
-import com.alibaba.dubbo.remoting.TimeoutException;
 import com.mogujie.tcc.coordinator.ParticipantProxy;
 import com.mogujie.tcc.coordinator.ServiceContext;
 import com.mogujie.tcc.coordinator.ServiceUnavailableException;
@@ -10,6 +9,7 @@ import com.mogujie.tcc.Procedure;
 import com.mogujie.tcc.common.Action;
 import com.mogujie.tcc.error.HeuristicsType;
 import com.mogujie.tcc.error.ParticipantException;
+import com.mogujie.tesla.client.exception.TeslaTimeoutException;
 
 public class ServiceTask implements Runnable {
 	
@@ -72,7 +72,7 @@ public class ServiceTask implements Runnable {
 		} catch (InterruptedException e) {
 			result.interrupted(seq, proc, "interrupted");
 		} catch (RuntimeException e) {
-			if (getCause(e) instanceof TimeoutException)
+			if (getCause(e) instanceof TeslaTimeoutException)
 				result.failed(seq, HeuristicsType.TIMEOUT, proc, "timeout");
 			if (getCause(e) instanceof InterruptedException)
 				result.interrupted(seq, proc, "interrupted");

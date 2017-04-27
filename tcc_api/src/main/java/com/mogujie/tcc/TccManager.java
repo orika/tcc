@@ -185,14 +185,14 @@ public class TccManager implements ApplicationContextAware {
 		@Override
 		public void confirm() throws CoordinatorException {
 			checkBegin();
-			short code = coordinator.confirm(id, uuid, confirmList);
+			short code = coordinator.confirm(id, uuid, Transaction.DEFAULT_TIMEOUT, confirmList);
 			checkResult(code, confirmList);
 		}
 
 		@Override
 		public void cancel() throws CoordinatorException {
 			checkBegin();
-			short code = coordinator.cancel(id, uuid, cancelList);
+			short code = coordinator.cancel(id, uuid, Transaction.DEFAULT_TIMEOUT, cancelList);
 			checkResult(code, cancelList);
 		}
 
@@ -266,7 +266,7 @@ public class TccManager implements ApplicationContextAware {
 			if (procList.isEmpty())
 				return;
 			try {
-				short code = coordinator.confirm(id, uuid, procList);
+				short code = coordinator.confirm(id, uuid, Transaction.DEFAULT_TIMEOUT, procList);
 				checkResult(code, procList);
 			} finally {
 				procList.clear();
@@ -292,7 +292,7 @@ public class TccManager implements ApplicationContextAware {
 			if (procList.isEmpty())
 				return;
 			try {
-				short code = coordinator.cancel(id, uuid, procList);
+				short code = coordinator.cancel(id, uuid, Transaction.DEFAULT_TIMEOUT, procList);
 				checkResult(code, procList);
 			} finally {
 				procList.clear();

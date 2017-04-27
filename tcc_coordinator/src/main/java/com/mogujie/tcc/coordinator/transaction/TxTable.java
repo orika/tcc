@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.mogujie.tcc.coordinator.id.IdGenerator;
 import com.mogujie.tcc.coordinator.log.Checkpoint;
 import com.mogujie.tcc.coordinator.log.LogManager;
 import org.apache.log4j.Logger;
-import org.jboss.netty.util.internal.ConcurrentHashMap;
 
 import com.mogujie.tcc.coordinator.config.CoordinatorConfig;
 import com.mogujie.tcc.coordinator.processor.ExpireProcessor;

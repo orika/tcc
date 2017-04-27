@@ -17,67 +17,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.3.RELEASE</version>
+	</parent>
+
 	<groupId>com.mogujie</groupId>
 	<artifactId>tcc</artifactId>
-	<version>1</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>tcc project</description>
 	<modules>
 		<module>tcc_api</module>
 		<module>tcc_coordinator</module>
-		<module>tcc_demo</module>
-		<module>tcc_perform</module>
 	</modules>
 	<properties>
-		<applicationVersion>1.2.0-SNAPSHOT</applicationVersion>
-		<demoVersion>1.0</demoVersion>
 		<skip_maven_deploy>true</skip_maven_deploy>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Common libs -->
-		<spring_version>2.5.6.SEC03</spring_version>
+		<!--<spring_version>2.5.6.SEC03</spring_version>-->
 		<zookeeper_version>3.4.6</zookeeper_version>
 		<zkclient_version>0.1</zkclient_version>
 		<mysql_version>5.1.31</mysql_version>
 		<dbcp_version>1.4</dbcp_version>
-		<monitor_version>2.0.4</monitor_version>
 		<!-- Log libs -->
-		<log4j_version>1.2.16</log4j_version>
+		<logback_version>1.1.3</logback_version>
 		<!-- Test libs -->
 		<junit_version>4.4</junit_version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
-			<!-- Common libs -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>2.4.9</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring</artifactId>
-				<version>${spring_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j_version}</version>
-			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback_version}</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.apache.zookeeper</groupId>
-			    <artifactId>zookeeper</artifactId>
-			    <version>${zookeeper_version}</version>
-			</dependency>
-			<dependency>
-			    <groupId>com.github.sgroschupf</groupId>
-			    <artifactId>zkclient</artifactId>
-			    <version>${zkclient_version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>mysql</groupId>

@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>com.mogujie</groupId>
 		<artifactId>tcc</artifactId>
-		<version>1</version>
+		<version>1.0.0</version>
 	</parent>
 	<artifactId>tcc_coordinator</artifactId>
-	<version>${applicationVersion}</version>
-	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
 	<description>The coordinator module of tcc</description>
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,28 +19,42 @@
 		<dependency>
 			<groupId>com.mogujie</groupId>
 			<artifactId>tcc_api</artifactId>
-			<version>${applicationVersion}</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
+			<groupId>com.mogujie.tesla</groupId>
+			<artifactId>tesla-spring-server</artifactId>
+			<version>1.1.8.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback_version}</version>
 		</dependency>
+
 		<dependency>
-		    <groupId>org.apache.zookeeper</groupId>
-		    <artifactId>zookeeper</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.3</version>
 		</dependency>
+
 		<dependency>
-		    <groupId>com.github.sgroschupf</groupId>
-		    <artifactId>zkclient</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>1.1.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
@@ -81,21 +95,6 @@
 						<exclude>**/*.py</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptor>src/main/assembly/assembly.xml</descriptor>
-                </configuration>
-                <executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
             </plugin>
 		</plugins>
 	</build>

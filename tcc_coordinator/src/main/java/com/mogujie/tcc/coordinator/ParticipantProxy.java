@@ -1,13 +1,12 @@
 package com.mogujie.tcc.coordinator;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.rpc.service.GenericException;
-import com.alibaba.dubbo.rpc.service.GenericService;
 import com.mogujie.tcc.coordinator.config.CoordinatorConfig;
 import com.mogujie.tcc.Participant;
 import com.mogujie.tcc.error.ParticipantException;
+import com.mogujie.tesla.client.api.TeslaServiceConsumerFactory;
+import com.mogujie.tesla.core.ReferConfig;
+import com.mogujie.tesla.generic.GenericException;
+import com.mogujie.tesla.generic.GenericService;
 
 public class ParticipantProxy implements Participant {
 
@@ -97,34 +96,24 @@ public class ParticipantProxy implements Participant {
 		if (lastFailedTs != 0 && !shouldRetry()) {
 			return false;
 		}
-		ApplicationConfig application = new ApplicationConfig();
-		RegistryConfig registry = new RegistryConfig();
-		ReferenceConfig<GenericService> reference = new ReferenceConfig<GenericService>();
 
-		String appName = config.getAppName();
-		String zookeeperUrl = config.getZkAddress();
-		String group = config.getAppGroup();
-		int timeout = config.getRpcTimeout();
-
-		application.setName(appName);
-		registry.setAddress(zookeeperUrl);
-		if (group != null)
-			registry.setGroup(group);
-
-		reference.setApplication(application);
-		reference.setRegistry(registry);
-		reference.setInterface(service);
-//		reference.setFilter("traceFilter");
-		reference.setGeneric(true); 
+		ReferConfig referConfig = new ReferConfig(service);
+		referConfig.setGeneric(true);
 		if (version != null)
-			reference.setVersion(version);
+			referConfig.setVersion(version);
+
+		String group = config.getAppGroup();
+		if (group != null)
+			referConfig.setGroup(group);
+
+		int timeout = config.getRpcTimeout();
 		if (timeout > 0)
-			reference.setTimeout(timeout);
+			referConfig.setTimeout(timeout);
 
 		try {
-			participant = reference.get();
+			participant = (GenericService) TeslaServiceConsumerFactory.getTeslaServiceConsumer(referConfig);
 			lastFailedTs = 0;
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			lastFailedTs = System.currentTimeMillis();
 			return false;
 		}

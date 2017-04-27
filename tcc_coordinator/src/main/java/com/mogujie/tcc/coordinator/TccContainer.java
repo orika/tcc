@@ -7,7 +7,12 @@ import com.mogujie.tcc.coordinator.recover.RecoverManager;
 import com.mogujie.tcc.coordinator.monitor.TccMonitor;
 import com.mogujie.tcc.coordinator.transaction.TxManager;
 import org.apache.log4j.Logger;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
+@SpringBootApplication
+@ImportResource({"classpath*:/spring/*.xml","classpath*:META-INF/tesla/core/*.xml"})
 public class TccContainer {
 	
 	private static final Logger logger = Logger.getLogger("TccContainer");
@@ -32,22 +37,17 @@ public class TccContainer {
 		txManager.enableRetry();
 		recoverManager.init();
 		uuidGenerator.init(recoverManager.getLastMaxUUID());
-		coordinator.start();
+//		coordinator.start();
 		monitor.start();
 		txManager.beginExpire();
 	}
 	
 	public void stop() {
-		coordinator.stop();
+//		coordinator.stop();
 	}
-	
-	public static void main(String[] args) throws IOException {
-		if (args.length != 0)
-			System.setProperty("dubbo.spring.config", args[0]);
-		else
-			System.setProperty("dubbo.spring.config", "classpath*:/spring/*.xml");
-		com.alibaba.dubbo.container.Main.main(new String[] {"spring", "log4j"});
-		logger.info("Tcc Service initializing...");
+
+	public static void main(String[] args) {
+		SpringApplication.run(TccContainer.class, args);
 	}
 	
 	public TxManager getTxManager() {

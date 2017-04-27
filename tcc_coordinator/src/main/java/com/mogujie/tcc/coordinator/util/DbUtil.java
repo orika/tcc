@@ -642,7 +642,7 @@ public class DbUtil {
 			
 			systemPstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new MonitorException("Write monitor record error", e);
+			throw new MonitorException("Write monitor record error, msg="+e.getMessage(), e);
 		} finally {
 			try {
 				if (systemPstmt != null)

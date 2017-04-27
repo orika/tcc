@@ -23,11 +23,7 @@ public class CoordinatorInstance {
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					TccContainer.main(new String[]{"classpath*:/test/*.xml"});
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				TccContainer.main(new String[]{"classpath*:/test/*.xml"});
 			}
 		});
 		thread.start();

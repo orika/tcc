@@ -16,7 +16,9 @@ public abstract class Transaction {
 	protected List<Procedure> expireList = null;
 	
 	protected static AtomicInteger idGenerator = new AtomicInteger(0);
-	
+
+	protected static final int DEFAULT_TIMEOUT = 100;
+
 	protected Transaction(Coordinator coordinator) {
 		this.coordinator = coordinator;
 		this.id = idGenerator.incrementAndGet();
@@ -85,9 +87,9 @@ public abstract class Transaction {
 			throw new ParticipantException("Participant error with uuid " + uuid, code);
 	}
 	
-	public static void main(String[] args) {
-		short a = (short) 16384;
-		System.out.println(TccCode.isTimeout(a));
-		System.out.println(a ^ TccUtils.TIMEOUT_MASK);
-	}
+//	public static void main(String[] args) {
+//		short a = (short) 16384;
+//		System.out.println(TccCode.isTimeout(a));
+//		System.out.println(a ^ TccUtils.TIMEOUT_MASK);
+//	}
 }
